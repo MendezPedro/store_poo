@@ -35,8 +35,7 @@ class Restaurante(Tienda):
     
     def ingress_products(self, name:str, cost:int, stock:int = 0):
         p = Product(name, cost)
-        encontrados = list(filter(lambda x : x == p, self.__product_list))
-        
+        encontrados = list(filter(lambda x : x.get_name == p.get_name, self.__product_list))
         if len(encontrados) == 0:
             self.__product_list.append(p)
 
@@ -64,13 +63,12 @@ class Farmacia(Tienda):
     
     def ingress_products(self, name:str, cost:int, stock:int = 0):
         p = Product(name, cost, stock)
-        encontrados = list(filter(lambda x : x == p, self.__product_list))
-        
+        encontrados = list(filter(lambda x : x.get_name == p.get_name, self.__product_list))
         if len(encontrados) == 0:
             self.__product_list.append(p)
         else:
-            indice = self.__product_list.index(p)
-            self.__product_list[indice].get_stock = p + self.__product_list[indice]
+            indice = self.__product_list.index(encontrados[0])
+            self.__product_list[indice].set_stock += stock
 
     def list_products(self)-> str:
         if len(self.__product_list):

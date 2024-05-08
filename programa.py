@@ -81,10 +81,14 @@ while True:
             tienda = Restaurante(tienda_name, tienda_delivery)
             break
         elif tienda_type == "2":
-            Supermercado()
+            tienda_name = input("Seleccione un Nombre: \n>>>")
+            tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
+            tienda = Supermercado(tienda_name, tienda_delivery)
             break
         elif tienda_type == "3":
-            Farmacia()
+            tienda_name = input("Seleccione un Nombre: \n>>>")
+            tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
+            tienda = Farmacia(tienda_name, tienda_delivery)
             break
         else:
             print('opcion invalida\n')
