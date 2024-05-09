@@ -32,5 +32,5 @@ class Product():
 
 if __name__ == "__main__":
     p = Product('product_name', 120, 3)
-    p.set_stock += 3
+    p.stock += 3
     print(p.stock)

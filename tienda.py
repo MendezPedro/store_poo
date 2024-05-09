@@ -44,8 +44,8 @@ class Restaurante(Tienda):
             retorno = ''
 
             for p in self.__product_list:
-                retorno += f'Name: {p.name},\n'\
-                            f'Cost: {p.cost}, \n'
+                retorno += f'Nombre: {p.name},\n'\
+                            f'Precio: {p.cost}, \n'
             return retorno
 
         else:
@@ -78,8 +78,8 @@ class Farmacia(Tienda):
                 m = ''
                 if p.cost > 15000:
                     m = 'envio gratis al solicitar el producto'
-                retorno += f'Name: {p.name}, \n'\
-                            f'Cost: {p.cost}, {m}\n'
+                retorno += f'Nombre: {p.name}, \n'\
+                            f'Precio: {p.cost}, {m}\n'
             return retorno
 
         else:
@@ -95,6 +95,8 @@ class Farmacia(Tienda):
                 nuevo_stock = tmp if tmp > 0 else 0
                 indice = self.__product_list.index(p)
                 self.__product_list[indice].stock = nuevo_stock
+
+        return 'venta realizada'
 
 class Supermercado(Tienda):
     def __init__(self, name, delivery_cost):
@@ -119,8 +121,8 @@ class Supermercado(Tienda):
                 m = ''
                 if p.stock < 10:
                     m = 'pocos productos disponibles'
-                retorno += f'Name: {p.name},\n'\
-                            f'Cost: {p.cost},\n'\
+                retorno += f'Nombre: {p.name},\n'\
+                            f'Precio: {p.cost},\n'\
                             f'Stock: {p.stock} {m}\n'
             return retorno
 
@@ -129,14 +131,16 @@ class Supermercado(Tienda):
     
     def sales(self, product_name:str, cantidad:int):
 
-            p = Product(product_name, 0, cantidad)
-            encontrados = list(filter(lambda x : x == p, self.__product_list))
+        p = Product(product_name, 0, cantidad)
+        encontrados = list(filter(lambda x : x == p, self.__product_list))
 
-            if len(encontrados) and encontrados[0].stock:
-                tmp = encontrados[0] - p
-                nuevo_stock = tmp if tmp > 0 else 0
-                indice = self.__product_list.index(p)
-                self.__product_list[indice].stock = nuevo_stock
+        if len(encontrados) and encontrados[0].stock:
+            tmp = encontrados[0] - p
+            nuevo_stock = tmp if tmp > 0 else 0
+            indice = self.__product_list.index(p)
+            self.__product_list[indice].stock = nuevo_stock
+
+        return 'venta realizada'
 
 if __name__ == "__main__":
     tienda = Supermercado('tienda_name', 1000)
