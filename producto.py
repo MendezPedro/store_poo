@@ -11,19 +11,19 @@ class Product():
         self.__stock = stock
 
     @property
-    def get_name(self):
+    def name(self):
         return self.__name
     
     @property
-    def get_cost(self):
+    def cost(self):
         return self.__cost
     
     @property
-    def get_stock(self):
+    def stock(self):
         return self.__stock
     
-    @get_stock.setter
-    def set_stock(self, cantidad:int):
+    @stock.setter
+    def stock(self, cantidad:int):
         if cantidad < 0:
             self.__stock = 0
         else:
@@ -33,4 +33,4 @@ class Product():
 if __name__ == "__main__":
     p = Product('product_name', 120, 3)
     p.set_stock += 3
-    print(p.get_stock)
+    print(p.stock)

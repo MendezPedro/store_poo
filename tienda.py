@@ -35,7 +35,7 @@ class Restaurante(Tienda):
     
     def ingress_products(self, name:str, cost:int, stock:int = 0):
         p = Product(name, cost)
-        encontrados = list(filter(lambda x : x.get_name == p.get_name, self.__product_list))
+        encontrados = list(filter(lambda x : x.name == p.name, self.__product_list))
         if len(encontrados) == 0:
             self.__product_list.append(p)
 
@@ -44,8 +44,8 @@ class Restaurante(Tienda):
             retorno = ''
 
             for p in self.__product_list:
-                retorno += f'Name: {p.get_name},\n'\
-                            f'Cost: {p.get_cost}, \n'
+                retorno += f'Name: {p.name},\n'\
+                            f'Cost: {p.cost}, \n'
             return retorno
 
         else:
@@ -63,12 +63,12 @@ class Farmacia(Tienda):
     
     def ingress_products(self, name:str, cost:int, stock:int = 0):
         p = Product(name, cost, stock)
-        encontrados = list(filter(lambda x : x.get_name == p.get_name, self.__product_list))
+        encontrados = list(filter(lambda x : x.name == p.name, self.__product_list))
         if len(encontrados) == 0:
             self.__product_list.append(p)
         else:
             indice = self.__product_list.index(encontrados[0])
-            self.__product_list[indice].set_stock += stock
+            self.__product_list[indice].stock += stock
 
     def list_products(self)-> str:
         if len(self.__product_list):
@@ -76,10 +76,10 @@ class Farmacia(Tienda):
 
             for p in self.__product_list:
                 m = ''
-                if p.get_cost > 15000:
+                if p.cost > 15000:
                     m = 'envio gratis al solicitar el producto'
-                retorno += f'Name: {p.get_name}, \n'\
-                            f'Cost: {p.get_cost}, {m}\n'
+                retorno += f'Name: {p.name}, \n'\
+                            f'Cost: {p.cost}, {m}\n'
             return retorno
 
         else:
@@ -90,11 +90,11 @@ class Farmacia(Tienda):
             p = Product(product_name, 0, cantidad)
             encontrados = list(filter(lambda x : x == p, self.__product_list))
 
-            if len(encontrados) and encontrados[0].get_stock:
+            if len(encontrados) and encontrados[0].stock:
                 tmp = encontrados[0] - p
                 nuevo_stock = tmp if tmp > 0 else 0
                 indice = self.__product_list.index(p)
-                self.__product_list[indice].get_stock = nuevo_stock
+                self.__product_list[indice].stock = nuevo_stock
 
 class Supermercado(Tienda):
     def __init__(self, name, delivery_cost):
@@ -104,12 +104,12 @@ class Supermercado(Tienda):
     
     def ingress_products(self, name:str, cost:int, stock:int = 0):
         p = Product(name, cost, stock)
-        encontrados = list(filter(lambda x : x.get_name == p.get_name, self.__product_list))
+        encontrados = list(filter(lambda x : x.name == p.name, self.__product_list))
         if len(encontrados) == 0:
             self.__product_list.append(p)
         else:
             indice = self.__product_list.index(encontrados[0])
-            self.__product_list[indice].set_stock += stock
+            self.__product_list[indice].stock += stock
 
     def list_products(self)-> str:
         if len(self.__product_list):
@@ -117,11 +117,11 @@ class Supermercado(Tienda):
 
             for p in self.__product_list:
                 m = ''
-                if p.get_stock < 10:
+                if p.stock < 10:
                     m = 'pocos productos disponibles'
-                retorno += f'Name: {p.get_name},\n'\
-                            f'Cost: {p.get_cost},\n'\
-                            f'Stock: {p.get_stock} {m}\n'
+                retorno += f'Name: {p.name},\n'\
+                            f'Cost: {p.cost},\n'\
+                            f'Stock: {p.stock} {m}\n'
             return retorno
 
         else:
@@ -132,11 +132,11 @@ class Supermercado(Tienda):
             p = Product(product_name, 0, cantidad)
             encontrados = list(filter(lambda x : x == p, self.__product_list))
 
-            if len(encontrados) and encontrados[0].get_stock:
+            if len(encontrados) and encontrados[0].stock:
                 tmp = encontrados[0] - p
                 nuevo_stock = tmp if tmp > 0 else 0
                 indice = self.__product_list.index(p)
-                self.__product_list[indice].get_stock = nuevo_stock
+                self.__product_list[indice].stock = nuevo_stock
 
 if __name__ == "__main__":
     tienda = Supermercado('tienda_name', 1000)

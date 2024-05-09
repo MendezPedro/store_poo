@@ -64,10 +64,8 @@ from tienda import Restaurante, Farmacia, Supermercado
 from producto import Product
 
 
-first_question = True
-
-while True:
-    while first_question:
+def create_store():
+    while True:
         print("Seleccione un tipo de tienda con su numero correspondiente:")
         print("1. Restaurante")
         print("2. Supermercado")
@@ -79,43 +77,126 @@ while True:
             tienda_name = input("Seleccione un Nombre: \n>>>")
             tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
             tienda = Restaurante(tienda_name, tienda_delivery)
-            break
+            return tienda
         elif tienda_type == "2":
             tienda_name = input("Seleccione un Nombre: \n>>>")
             tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
             tienda = Supermercado(tienda_name, tienda_delivery)
-            break
+            return tienda
         elif tienda_type == "3":
             tienda_name = input("Seleccione un Nombre: \n>>>")
             tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
             tienda = Farmacia(tienda_name, tienda_delivery)
-            break
+            return tienda
         else:
             print('opcion invalida\n')
-    first_question = False
+
+def main():
+    # Crear una instancia de Tienda
+    tienda = create_store()
+
+    #ingreso productos
+    ingresar_productos(tienda)
+
+
+    while True:
+        print("\nAcciones disponibles:")
+        print("1. Listar productos existentes")
+        print("2. Realizar una venta")
+        print("3. Salir del programa")
+
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            listar_productos(tienda)
+        elif opcion == "2":
+            realizar_venta(tienda)
+        elif opcion == "3":
+            print("¡Hasta luego!")
+            break
+        else:
+            print("Opción no válida. Por favor, seleccione una opción válida.")
+
+def ingresar_productos(tienda):
+    while True:
+        nombre = input("Ingrese el nombre del producto: ")
+        precio = float(input("Ingrese el precio del producto: "))
+        stock = int(input("Ingrese el stock del producto: "))
+
+        tienda.ingress_products(nombre, precio, stock)
+
+        continuar = input("¿Desea ingresar otro producto? (s/n): ")
+        if continuar.lower() != "s":
+            break
+
+def listar_productos(tienda):
+    print("\nProductos existentes:")
+    print(tienda.list_products())
+
+
+def realizar_venta(tienda):
+    nombre_producto = input("Ingrese el nombre del producto a vender: ")
+    cantidad = int(input("Ingrese la cantidad a vender: "))
+
+    tienda.sales(nombre_producto, cantidad)
+
+
+
+# first_question = True
+
+# while True:
+#     while first_question:
+#         print("Seleccione un tipo de tienda con su numero correspondiente:")
+#         print("1. Restaurante")
+#         print("2. Supermercado")
+#         print("3. Farmacia")
+
+#         tienda_type = input("Seleccione una opción: \n>>>")
+
+#         if tienda_type == "1":
+#             tienda_name = input("Seleccione un Nombre: \n>>>")
+#             tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
+#             tienda = Restaurante(tienda_name, tienda_delivery)
+#             break
+#         elif tienda_type == "2":
+#             tienda_name = input("Seleccione un Nombre: \n>>>")
+#             tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
+#             tienda = Supermercado(tienda_name, tienda_delivery)
+#             break
+#         elif tienda_type == "3":
+#             tienda_name = input("Seleccione un Nombre: \n>>>")
+#             tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
+#             tienda = Farmacia(tienda_name, tienda_delivery)
+#             break
+#         else:
+#             print('opcion invalida\n')
+#     first_question = False
     
-    print("Menú:")
-    print("1. Ingresar productos")
-    print("2. Listar productos")
-    print("3. Realizar venta")
-    print("4. Salir")
+#     print("Menú:")
+#     print("1. Ingresar productos")
+#     print("2. Listar productos")
+#     print("3. Realizar venta")
+#     print("4. Salir")
 
-    opcion = input("Seleccione una opción: \n>>>")
+#     opcion = input("Seleccione una opción: \n>>>")
 
-    if opcion == "1":
-        nombre_producto = input("Ingrese el nombre del producto: ")
-        precio_producto = float(input("Ingrese el precio del producto: "))
-        stock_producto = int(input("Ingrese el stock del producto: "))
-        tienda.ingress_products(nombre_producto, precio_producto, stock_producto)
-        print("Producto ingresado correctamente.")
-    elif opcion == "2":
-        print("Productos existentes:")
-        print(tienda.list_products())
-    elif opcion == "3":
-        nombre_producto = input("Ingrese el nombre del producto a vender: ")
-        cantidad = int(input("Ingrese la cantidad a vender: "))
-        tienda.sales(nombre_producto, cantidad)
-    elif opcion == "4":
-        exit()
-    else:
-        print("Opción inválida. Intente nuevamente.\n")
+#     if opcion == "1":
+#         nombre_producto = input("Ingrese el nombre del producto: ")
+#         precio_producto = float(input("Ingrese el precio del producto: "))
+#         stock_producto = int(input("Ingrese el stock del producto: "))
+#         tienda.ingress_products(nombre_producto, precio_producto, stock_producto)
+#         print("Producto ingresado correctamente.")
+#     elif opcion == "2":
+#         print("Productos existentes:")
+#         print(tienda.list_products())
+#     elif opcion == "3":
+#         nombre_producto = input("Ingrese el nombre del producto a vender: ")
+#         cantidad = int(input("Ingrese la cantidad a vender: "))
+#         tienda.sales(nombre_producto, cantidad)
+#     elif opcion == "4":
+#         exit()
+#     else:
+#         print("Opción inválida. Intente nuevamente.\n")
+
+if __name__ == "__main__":
+    main()
