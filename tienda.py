@@ -86,17 +86,13 @@ class Farmacia(Tienda):
             return 'no hay productos'
     
     def sales(self, product_name:str, cantidad:int):
-        if cantidad < 3:
+        if cantidad <= 3:
             p = Product(product_name, 0, cantidad)
-            encontrados = list(filter(lambda x : x == p, self.__product_list))
+            encontrados = list(filter(lambda x : x.name == p.name, self.__product_list))
 
-            if len(encontrados) and encontrados[0].stock:
-                tmp = encontrados[0] - p
-                nuevo_stock = tmp if tmp > 0 else 0
-                indice = self.__product_list.index(p)
-                self.__product_list[indice].stock = nuevo_stock
+            if len(encontrados) and (encontrados[0].stock > 0):
+                encontrados[0].stock -= cantidad
 
-        return 'venta realizada'
 
 class Supermercado(Tienda):
     def __init__(self, name, delivery_cost):
@@ -130,21 +126,31 @@ class Supermercado(Tienda):
             return 'no hay productos'
     
     def sales(self, product_name:str, cantidad:int):
-
         p = Product(product_name, 0, cantidad)
-        encontrados = list(filter(lambda x : x == p, self.__product_list))
+        encontrados = list(filter(lambda x : x.name == p.name, self.__product_list))
+        if len(encontrados) and (encontrados[0].stock > 0):
+            encontrados[0].stock -= cantidad
 
-        if len(encontrados) and encontrados[0].stock:
-            tmp = encontrados[0] - p
-            nuevo_stock = tmp if tmp > 0 else 0
-            indice = self.__product_list.index(p)
-            self.__product_list[indice].stock = nuevo_stock
-
-        return 'venta realizada'
 
 if __name__ == "__main__":
     tienda = Supermercado('tienda_name', 1000)
     tienda.ingress_products('nombre_producto', 120, 10)
-    tienda.ingress_products('nombre_pr', 120000, 1)
+    tienda.ingress_products('segundo_producto', 120000, 1)
     tienda.ingress_products('nombre_producto', 120, 3)
     print(tienda.list_products())
+    tienda.sales('nombre_producto', 19)
+    print(tienda.list_products())
+
+    tienda = Farmacia('tienda_name', 1000)
+    tienda.ingress_products('nombre_producto', 120, 1)
+    tienda.ingress_products('segundo_producto', 120000, 1)
+    tienda.ingress_products('nombre_producto', 120, 1)
+    print(tienda.list_products())
+    tienda.sales('nombre_producto', 3)
+    print(tienda.list_products())
+
+    # tienda = Restaurante('tienda_name', 1000)
+    # tienda.ingress_products('nombre_producto', 120, 10)
+    # tienda.ingress_products('segundo_producto', 120000, 1)
+    # tienda.ingress_products('nombre_producto', 120, 3)
+    # print(tienda.list_products())

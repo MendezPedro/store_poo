@@ -95,16 +95,15 @@ def main():
     # Crear una instancia de Tienda
     tienda = create_store()
 
-    #ingreso productos
+    #ingreso de productos hasta que el usuario lo determine
     ingresar_productos(tienda)
 
-
+    #menu para listar, vender y salir
     while True:
         print("\nAcciones disponibles:")
         print("1. Listar productos existentes")
         print("2. Realizar una venta")
         print("3. Salir del programa")
-
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
@@ -137,11 +136,7 @@ def listar_productos(tienda):
 def realizar_venta(tienda):
     nombre_producto = input("Ingrese el nombre del producto a vender: ")
     cantidad = int(input("Ingrese la cantidad a vender: "))
-
     venta = tienda.sales(nombre_producto, cantidad)
-    if venta == None:
-        venta = 'No aplica venta'
-    print(venta)
 
 
 if __name__ == "__main__":
