@@ -1,4 +1,4 @@
-from anuncio import Anuncio
+from anuncio import Anuncio, Video, Display, Social
 from datetime import date
 from error import LargoExcedidoError
 
@@ -46,7 +46,7 @@ class Campaña():
         display = 0
         social = 0
 
-        for anuncio in anuncios:
+        for anuncio in self.anuncios:
             if isinstance(anuncio, Video):
                 video += 1
             elif isinstance(anuncio, Display):
