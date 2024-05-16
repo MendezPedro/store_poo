@@ -4,8 +4,8 @@ from error import SubTipoInvalidoError
 
 class Anuncio(ABC):
     def __init__(self,ancho: int, alto:int, url_archivo: str, url_clic:str, sub_tipo: str):
-        self.__ancho = ancho
-        self.__alto = alto
+        self.__ancho = validar_duracion(ancho,1)
+        self.__alto = validar_duracion(alto,1)
         self.__url_archivo = url_archivo
         self.__url_clic = url_clic
         self.__sub_tipo = sub_tipo
@@ -16,7 +16,7 @@ class Anuncio(ABC):
     
     @ancho.setter
     def ancho(self, nuevo_ancho):
-        self.__ancho = nuevo_ancho if nuevo_ancho > 0 else 1
+        self.__ancho = validar_duracion(nuevo_ancho,1)
 
     @property
     def alto(self):
@@ -24,7 +24,7 @@ class Anuncio(ABC):
     
     @alto.setter
     def alto(self, nuevo_alto):
-        self.__alto = nuevo_alto if nuevo_alto > 0 else 1
+        self.__alto = validar_duracion(nuevo_alto,1)
 
     @property
     def url_archivo(self):
@@ -64,18 +64,10 @@ class Anuncio(ABC):
 
     @staticmethod
     def mostrar_formatos():
-        return f'\nFORMATO 1: {Video.FORMATO}\tFORMATO 2: {Display.FORMATO}\tFORMATO 2: {Social.FORMATO}'\
+        return f'\nFORMATO 1: {Video.FORMATO}\tFORMATO 2: {Display.FORMATO}\tFORMATO 3: {Social.FORMATO}'\
                 f'\n==================\t==================\t=================='\
                 f'\n-{Video.SUB_TIPOS[0]}\t\t-{Display.SUB_TIPOS[0]}\t\t-{Social.SUB_TIPOS[0]}'\
             f'\n-{Video.SUB_TIPOS[1]}\t\t-{Display.SUB_TIPOS[1]}\t\t\t-{Social.SUB_TIPOS[1]}\n'
-
-
-#funcion para delimitar duracion del video
-def validar_duracion(duracion):
-    if duracion > 0:
-        return duracion
-    else:
-        return 5
 
 
 class Video(Anuncio):
@@ -86,7 +78,7 @@ class Video(Anuncio):
         self.formato = Video.FORMATO
         self.__ancho = 1
         self.__alto = 1
-        self.__duracion = validar_duracion(duracion)
+        self.__duracion = validar_duracion(duracion,5)
     
     @property
     def ancho(self):
@@ -110,7 +102,7 @@ class Video(Anuncio):
     
     @duracion.setter
     def duracion(self, nuevo_duracion):
-        self.__duracion = validar_duracion(nuevo_duracion)
+        self.__duracion = validar_duracion(nuevo_duracion,5)
     
     def comprimir_anuncio(self):
         print("COMPRESIÓN DE VIDEO NO IMPLEMENTADA AÚN")
@@ -143,6 +135,9 @@ class Social(Anuncio):
         print("REDIMENSIONAMIENTO DE ANUNCIOS DE REDES SOCIALES NO IMPLEMENTADO AÚN")
 
 
+validar_duracion = lambda duracion, valor: duracion if duracion > 0 else valor
+
 if __name__ == "__main__":
     video = Video(3)
     print(video.mostrar_formatos())
+    print(validar_duracion(-3,1))
