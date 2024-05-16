@@ -72,20 +72,16 @@ def create_store():
         print("3. Supermercado")
 
         tienda_type = input("Seleccione una opción: \n>>>")
+        tienda_name = input("Seleccione un Nombre: \n>>>")
+        tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
 
         if tienda_type == "1":
-            tienda_name = input("Seleccione un Nombre: \n>>>")
-            tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
             tienda = Restaurante(tienda_name, tienda_delivery)
             return tienda
         elif tienda_type == "2":
-            tienda_name = input("Seleccione un Nombre: \n>>>")
-            tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
             tienda = Farmacia(tienda_name, tienda_delivery)
             return tienda
         elif tienda_type == "3":
-            tienda_name = input("Seleccione un Nombre: \n>>>")
-            tienda_delivery = input("Seleccione el costo del delivery: \n>>>")
             tienda = Supermercado(tienda_name, tienda_delivery)
             return tienda
         else:

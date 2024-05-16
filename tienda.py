@@ -101,6 +101,8 @@ class Supermercado(Tienda):
         self.__product_list = []
     
     def ingress_products(self, name:str, cost:int, stock:int = 0):
+        # es una composicion porque la instancia de producto se crea dentro de supermercado
+        # haciendo que si yo destruyo el supermercado dejan de existir sus productos
         p = Product(name, cost, stock)
         encontrados = list(filter(lambda x : x.name == p.name, self.__product_list))
         if len(encontrados) == 0:
