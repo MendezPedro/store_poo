@@ -64,11 +64,10 @@ class Anuncio(ABC):
 
     @staticmethod
     def mostrar_formatos():
-        return f'{sub_tipos}'\
-                f'FORMATO {tipo.FORMATO}'\
-                f'======================'\
-                f'-{sub_tipo[0]}'\
-                f'-{sub_tipo[1]}'
+        return f'\nFORMATO 1: {Video.FORMATO}\tFORMATO 2: {Display.FORMATO}\tFORMATO 2: {Social.FORMATO}'\
+                f'\n==================\t==================\t=================='\
+                f'\n-{Video.SUB_TIPOS[0]}\t\t-{Display.SUB_TIPOS[0]}\t\t-{Social.SUB_TIPOS[0]}'\
+            f'\n-{Video.SUB_TIPOS[1]}\t\t-{Display.SUB_TIPOS[1]}\t\t\t-{Social.SUB_TIPOS[1]}\n'
 
 
 #funcion para delimitar duracion del video
@@ -83,7 +82,7 @@ class Video(Anuncio):
     FORMATO = 'Video'
     SUB_TIPOS = ('instream', 'outstream')
     
-    def __init__(self,duracion):
+    def __init__(self,duracion:int):
         self.formato = Video.FORMATO
         self.__ancho = 1
         self.__alto = 1
@@ -142,3 +141,8 @@ class Social(Anuncio):
 
     def redimensionar_anuncio(self):
         print("REDIMENSIONAMIENTO DE ANUNCIOS DE REDES SOCIALES NO IMPLEMENTADO AÚN")
+
+
+if __name__ == "__main__":
+    video = Video(3)
+    print(video.mostrar_formatos())
