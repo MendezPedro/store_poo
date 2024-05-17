@@ -48,7 +48,9 @@ class Anuncio(ABC):
     
     @sub_tipo.setter
     def sub_tipo(self, nuevo_sub_tipo):
-        if isinstance(nuevo_sub_tipo, self.Video.SUB_TIPOS):
+        print(nuevo_sub_tipo)
+        # if isinstance(nuevo_sub_tipo, self.SUB_TIPOS):
+        if nuevo_sub_tipo in self.SUB_TIPOS:
             self.__sub_tipo = nuevo_sub_tipo
         else:
             raise SubTipoInvalidoError("error al ingresar Sub Tipo")
@@ -73,12 +75,13 @@ class Anuncio(ABC):
 class Video(Anuncio):
     FORMATO = 'Video'
     SUB_TIPOS = ('instream', 'outstream')
-    
-    def __init__(self,duracion:int):
+    def __init__(self, url_archivo: str, url_clic: str, sub_tipo: str, duracion: int):
+        super().__init__(ancho=1, alto=1, url_archivo=url_archivo, url_clic=url_clic, sub_tipo=sub_tipo)
         self.formato = Video.FORMATO
+        self.__duracion = validar_duracion(duracion, 5)
+        # si no lo vuelvo a declarar no me permite acceder
         self.__ancho = 1
         self.__alto = 1
-        self.__duracion = validar_duracion(duracion,5)
     
     @property
     def ancho(self):
@@ -138,6 +141,11 @@ class Social(Anuncio):
 validar_duracion = lambda duracion, valor: duracion if duracion > 0 else valor
 
 if __name__ == "__main__":
-    video = Video(3)
-    print(video.mostrar_formatos())
+    video = Video('url', 'url_clic', 'instream', 3)
+    # print(video.mostrar_formatos())
     print(validar_duracion(-3,1))
+
+    # video.redimensionar_anuncio()
+    print(video.ancho)
+    video.ancho = 2
+    print(video.ancho)
