@@ -5,8 +5,7 @@ from datetime import date
 #     pass
 
 try:
-    video_1 = Video('url', 'url_clic', 'instream', 3)
-    campaña = Campaña('campaña1', date(2022, 5, 16), date(2024, 5, 16), video_1)
+    campaña = Campaña('campaña1', date(2022, 5, 16), date(2024, 5, 16), (1,0,0))
     nuevo_nombre = input("ingrese un nuevo Nombre para la campaña: ")
     campaña.nombre = nuevo_nombre
     nuevo_sub_tipo = input("ingrese un nuevo sub_tipo para la campaña: ")

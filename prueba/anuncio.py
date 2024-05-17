@@ -48,12 +48,11 @@ class Anuncio(ABC):
     
     @sub_tipo.setter
     def sub_tipo(self, nuevo_sub_tipo):
-        print(nuevo_sub_tipo)
         # if isinstance(nuevo_sub_tipo, self.SUB_TIPOS):
         if nuevo_sub_tipo in self.SUB_TIPOS:
             self.__sub_tipo = nuevo_sub_tipo
         else:
-            raise SubTipoInvalidoError("error al ingresar Sub Tipo")
+            raise SubTipoInvalidoError(f"error al ingresar Sub Tipo. Tipos permitidos{self.SUB_TIPOS}")
 
         
     @abstractmethod
