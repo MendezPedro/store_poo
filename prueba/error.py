@@ -7,7 +7,7 @@ class LargoExcedidoError(Error):
         self.mensaje = mensaje
 
     def __str__(self) -> str:
-        return f'mensaje de error:{self.mensaje},'\
+        return f'{self.mensaje}'\
 
 
 class SubTipoInvalidoError(Error):
@@ -15,4 +15,4 @@ class SubTipoInvalidoError(Error):
         self.mensaje = mensaje
 
     def __str__(self) -> str:
-        return f'mensaje de error:{self.mensaje},'
+        return f'{self.mensaje}'
