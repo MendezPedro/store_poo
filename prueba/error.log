@@ -1,1 +1,16 @@
 __init__() missing 1 required positional argument: 'duracion'
+name 'anuncios' is not defined
+__init__() takes 5 positional arguments but 9 were given
+list index out of range
+list index out of range
+'Video' object has no attribute 'Video'
+'Video' object has no attribute 'Video'
+isinstance() arg 2 must be a type or tuple of types
+isinstance() arg 2 must be a type or tuple of types
+mensaje de error:error al ingresar Sub Tipo,
+mensaje de error:error al ingresar Sub Tipo,
+mensaje de error:error al ingresar Sub Tipo,
+mensaje de error:error al ingresar Sub Tipo,
+mensaje de error:error al exceder el maximo de 250 caracteres del nombre,
+error al exceder el maximo de 250 caracteres del nombre
+error al ingresar Sub Tipo
